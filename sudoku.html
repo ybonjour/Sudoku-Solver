@@ -1,0 +1,193 @@
+<html>
+<head>
+  <script type="text/javascript" src="sudoku.js"></script>
+  <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+
+  <script type="text/javascript">
+	
+	var sudoku = load_sudoku(); 
+	
+	$(document).ready(function(){
+		$("#solve").click(function(){
+			solve_sudoku();
+		});
+	});
+	
+	function solve_sudoku(){
+		var value;
+		var sudoku_field;
+		var sudoku_row;
+
+		sudoku_field = [];
+		for(var row =0; row < 9; row++){
+			sudoku_row = []
+			for(var column = 0; column < 9; column++){
+				value = $("#sudoku_" + row + "_" + column).val();
+				if(value !== ''){
+				  sudoku_row.push(parseInt(value));
+				} else {
+				  sudoku_row.push(0);
+				}
+			}
+			sudoku_field.push(sudoku_row);
+		}
+		
+		console.log(sudoku_field);
+    
+		if(sudoku.solve(sudoku_field)){
+		  for(var row=0; row < 9; row++){
+			for(var column=0; column < 9; column++){
+			   $("#sudoku_" + row + "_" + column).val(sudoku.solution(row, column));
+			}
+		  }
+		} else {
+		  alert('No solution');
+		}
+  }
+  </script>
+
+  <style type="text/css">
+    #sudoku{
+      border:1px solid black;
+    }
+      #sudoku > td{
+      border:1px solid black;
+    }
+    .sudoku_cell{
+      width:50;
+      height:50;
+      font-size:20pt;
+      border: 1px solid black;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <table id="sudoku">
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_0_8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_1_8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_2_8"/></td>
+  </tr>
+  <tr>
+    <td cellpadding="11">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_3_8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_4_8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_5_8"/></td>
+  </tr>
+  <tr>
+    <td cellpadding="11">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_6_8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_7_8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_0"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_1"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_2"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_3"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_4"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_5"/></td>
+    <td>&nbsp;</td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_6"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_7"/></td>
+    <td><input type="text" class="sudoku_cell" id="sudoku_8_8"/></td>
+  </tr>
+  </table>
+  <input type="button" id="solve" value="Solve" />
+</body>
+</html>
