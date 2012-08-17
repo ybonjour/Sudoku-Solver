@@ -1,18 +1,16 @@
-function load_sudoku(){
+function Sudoku(){
 	var field = [];
 	var openCellPositions = [];
 	
-	return {
-		solve : function (givenField){
-			if(!initializeField(givenField)){
-				return false;
-			}
-			return solveBacktracking(0);
-		}, 
-		
-		solution : function(row, column){
-			return field[row][column].value;
+	this.solve = function (givenField){
+		if(!initializeField(givenField)){
+			return false;
 		}
+		return solveBacktracking(0);
+	};
+		
+	this.solution = function(row, column){
+		return field[row][column].value;
 	};
 
 	function initializeField(givenField){
